@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Special Day Surprise</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* Base Styling */
+
+        /* Base Styling - Updated with Fonts & Gradient */
+
+        body {
+
+            font-family: 'Nunito', sans-serif; /* Rounder, cuter text */
+
+            margin: 0;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 100dvh;
+
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); /* Soft gradient */
+
+            transition: background 1s ease-in-out;
+
+            overflow: hidden;
+
+        }
+
+
+
+        h2, h3 {
+
+            font-family: 'Pacifico', cursive; /* Handwritten font */
+
+            font-weight: normal;
+
+            color: #e91e63; /* Pinkish text */
+
+        }
+
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 500px;
+
+            padding: 20px;
+
+            max-height: 100dvh; /* Restrict height to viewport height */
+
+            overflow-y: auto; /* Allow scrolling if content is too tall */
+
+            text-align: center;
+
+            z-index: 10;
+
+            position: relative;
+
+        }
+
+
+
+        /* Heart Styling and Animation (Unchanged) */
+
+        .heart-container {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+            z-index: 5;
+
+        }
+
+
+
+        .heart {
+
+            position: absolute;
+
+            color: #ff69b4; /* Hot Pink */
+
+            text-shadow: 0 0 5px rgba(255,105,180,0.5); /* Soft glow */
+
+            font-size: 1.8em; /* Slightly larger */
+
+            opacity: 0;
+
+            animation: popAndFall linear infinite;
+
+            pointer-events: none; /* Ensure no interaction */
+
+            }
+
+
+
+        @keyframes popAndFall {
+
+            0% {
+
+                transform: translateY(100vh) scale(0);
+
+                opacity: 0;
+
+            }
+
+            10% {
+
+                transform: translateY(90vh) scale(1);
+
+                opacity: 1;
+
+            }
+
+            80% {
+
+                opacity: 0.5;
+
+            }
+
+            100% {
+
+                transform: translateY(-5vh) scale(0.8);
+
+                opacity: 0;
+
+            }
+
+        }
+
+       
+
+        /* Message Box Styling (Unchanged, retaining pink background) */
+
+        .message-box {
+
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent */
+
+            padding: 30px 20px; /* More padding for a premium feel */
+
+            border-radius: 20px; /* More rounded */
+
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
+
+            margin-bottom: 20px;
+
+            /* ... keep opacity/transform/transition lines ... */
+
+            opacity: 0;
+
+            transform: translateY(20px);
+
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out, background-color 0.5s;
+
+            min-height: 100px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+
+
+        /* --- NEW: Mobile Optimization for Initial Messages (msg-1, msg-2, msg-3) --- */
+
+        @media (max-width: 600px) {
+
+            /* Reduce padding and margin for a tighter fit */
+
+            .message-box.intro-message {
+
+                padding: 10px 15px;
+
+                margin-bottom: 15px;
+
+                min-height: 70px; /* Reduce min height */
+
+            }
+
+
+
+            /* Shrink the large header in the first box */
+
+            .message-box h2 {
+
+                font-size: 1.5em; /* Smaller header */
+
+                margin: 5px 0;
+
+            }
+
+
+
+            /* Shrink the sparkle text */
+
+            .sparkle {
+
+                font-size: 1.5em;
+
+                margin-bottom: 5px;
+
+            }
+
+
+
+            /* Adjust the text size for readability */
+
+            .message-box p {
+
+                font-size: 0.9em;
+
+                margin: 5px 0;
+
+            }
+
+        }
+
+
+
+        .intro-message {
+
+            background-color: #ffeded; /* Very light, baby pink */
+
+        }
+
+       
+
+        .message-box.active {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+
+
+        .sparkle {
+
+            font-size: 2em;
+
+            margin-bottom: 10px;
+
+        }
+
+
+
+        /* Button Styling (Unchanged) */
+
+        .button-group button {
+
+            padding: 10px 20px;
+
+            margin: 5px;
+
+            border: none;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: background-color 0.3s;
+
+        }
+
+
+
+        .yes-btn {
+
+            background-color: #e91e63;
+
+            color: white;
+
+        }
+
+
+
+        .no-btn {
+
+            background-color: #9e9e9e;
+
+            color: white;
+
+        }
+
+
+
+        .action-button {
+
+            background-color: #e91e63;
+
+            color: white;
+
+            padding: 12px 25px;
+
+            font-size: 1.1em;
+
+            font-family: 'Nunito', sans-serif; /* Use the cute font */
+
+            font-weight: bold;
+
+            margin: 15px auto; /* More breathing room */
+
+            display: block;
+
+            border: none; /* Remove default border */
+
+            border-radius: 50px; /* Fully rounded pills */
+
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Soft shadow */
+
+            cursor: pointer;
+
+            opacity: 0;
+
+            transform: scale(0.8);
+
+            transition: all 0.3s ease; /* Smooth hover effects */
+
+        }
+
+       
+
+        .action-button:hover {
+
+            background-color: #c2185b;
+
+            transform: scale(1.05) translateY(-2px); /* Grows and lifts up */
+
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Shadow gets bigger */
+
+        }
+
+
+
+        .action-button.show {
+
+            opacity: 1;
+
+            transform: scale(1);
+
+        }
+
+
+
+        /* Background/Decoration/Dark Mode (Unchanged) */
+
+        /* Background/Dark Mode - Night Sky Effect */
+
+        body.dark-mode {
+
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); /* Night Sky Gradient */
+
+            color: white;
+
+        }
+
+       
+
+        body.dark-mode .message-box {
+
+            background-color: #1e1e1e;
+
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+
+        }
+
+
+
+        /* --- NEW & MODIFIED DECORATION STYLES --- */
+
+        .decorations {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+            z-index: 6;
+
+        }
+
+
+
+        /* MODIFIED Garland/Banner Style - Softer, more festive colors & animation */
+
+        .banner {
+
+            position: absolute;
+
+            top: 20px;
+
+            left: 50%;
+
+            transform: translateX(-50%) translateY(-50px); /* Start slightly higher */
+
+            opacity: 0;
+
+            transition: opacity 1s ease-in-out, transform 1s ease-out; /* Add transform transition */
+
+   
+
+            font-size: 0;
+
+            height: 35px;
+
+            width: 80%;
+
+            max-width: 450px;
+
+            /* Updated SVG for soft pink/gold/light teal flags */
+
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath fill='%23f7a7b8' d='M0 0 L10 20 L20 0 Z'/%3E%3Cpath fill='%23ffd700' d='M20 0 L30 20 L40 0 Z'/%3E%3Cpath fill='%23b3e0d8' d='M40 0 L50 20 L60 0 Z'/%3E%3Cpath fill='%23f7a7b8' d='M60 0 L70 20 L80 0 Z'/%3E%3Cpath fill='%23ffd700' d='M80 0 L90 20 L100 0 Z'/%3E%3C/svg%3E");
+
+            background-size: 20% 100%;
+
+            background-repeat: repeat-x;
+
+            border-bottom: 2px solid #ff6f91; /* The connecting string: Pink */
+
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Add a subtle shadow */
+
+        }
+
+
+
+        .decorations.decorated .banner {
+
+            opacity: 1;
+
+            transform: translateX(-50%) translateY(0px) rotate(0deg); /* Float down and stop */
+
+            animation: bannerSwing 3s ease-in-out infinite alternate; /* New swing animation */
+
+        }
+
+
+
+        @keyframes bannerSwing {
+
+            0% { transform: translateX(-50%) translateY(0px) rotate(-1deg); }
+
+            100% { transform: translateX(-50%) translateY(0px) rotate(1deg); }
+
+        }
+
+
+
+       
+
+
+
+        /* NEW & MODIFIED: Confetti/Sparkle Styles */
+
+        .confetti {
+
+            position: absolute;
+
+            width: 10px;
+
+            height: 10px;
+
+            background-color: currentColor; /* Use color for background by default */
+
+            border-radius: 50%;
+
+            opacity: 0;
+
+            animation: confettiFall 5s ease-out forwards;
+
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Subtle glow */
+
+            transform-origin: center center; /* For rotation */
+
+        }
+
+
+
+        /* Specific star styling */
+
+        .confetti.star {
+
+            background-color: transparent; /* No background for star */
+
+            color: #ffd700; /* Gold color */
+
+            font-size: 1.2em; /* Bigger stars */
+
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.7); /* More prominent glow */
+
+            width: auto; /* Allow text to size it */
+
+            height: auto;
+
+            border-radius: 0;
+
+        }
+
+
+
+        /* Confetti Falling Animation - Added sway and varied rotation */
+
+        @keyframes confettiFall {
+
+            0% {
+
+                transform: translateY(-5vh) translateX(0) rotate(0deg);
+
+                opacity: 1;
+
+            }
+
+            25% { transform: translateX(10px) rotate(90deg); }
+
+            50% { transform: translateX(-10px) rotate(180deg); }
+
+            75% { transform: translateX(5px) rotate(270deg); }
+
+            100% {
+
+                transform: translateY(100vh) translateX(0) rotate(360deg);
+
+                opacity: 0.5;
+
+            }
+
+        }
+
+       
+
+        /* Balloon Styles - Reintroduced and modified */
+
+        /* Balloon Styles - Reintroduced and modified for cuter look */
+
+        .balloon {
+
+            position: absolute;
+
+            width: 30px; /* Slightly larger */
+
+            height: 40px; /* Slightly larger */
+
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; /* More authentic balloon shape */
+
+            box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255,255,255,0.4); /* Enhanced shadow and glow */
+
+            opacity: 0;
+
+            animation: floatUpAndSway 10s ease-out forwards infinite;
+
+            bottom: -70px; /* Start further below screen */
+
+            z-index: 7; /* Ensure balloons are above confetti but below banner */
+
+        }
+
+
+
+        .balloon::before {
+
+            content: '';
+
+            position: absolute;
+
+            bottom: -7px; /* Adjust for larger balloon */
+
+            left: 50%;
+
+            transform: translateX(-50%) rotate(45deg);
+
+            width: 0;
+
+            height: 0;
+
+            border-left: 4px solid transparent; /* Slightly thicker knot */
+
+            border-right: 4px solid transparent;
+
+            border-top: 6px solid currentColor; /* Use balloon color for the knot */
+
+        }
+
+
+
+        .balloon::after {
+
+            content: '';
+
+            position: absolute;
+
+            width: 1px;
+
+            height: 200px; /* Longer string */
+
+            background: rgba(0, 0, 0, 0.3);
+
+            bottom: -200px;
+
+            left: 50%;
+
+            /* Add a subtle wave to the string */
+
+            background: linear-gradient(to bottom, currentColor 0%, rgba(0,0,0,0.3) 100%);
+
+        }
+
+
+
+        @keyframes floatUpAndSway {
+
+            0% {
+
+                transform: translateY(0) translateX(0) rotate(0deg);
+
+                opacity: 0.9; /* Start more visible */
+
+            }
+
+            25% { transform: translateY(-25vh) translateX(25px) rotate(5deg); }
+
+            50% { transform: translateY(-50vh) translateX(-25px) rotate(-5deg); }
+
+            75% { transform: translateY(-75vh) translateX(15px) rotate(3deg); }
+
+            100% {
+
+                transform: translateY(-120vh) translateX(0px) rotate(0deg); /* Float higher */
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+
+        /* --- NEW: Enchanting Background Glow --- */
+
+        .background-glow {
+
+            position: fixed;
+
+            top: 50%;
+
+            left: 50%;
+
+            width: 0;
+
+            height: 0;
+
+            border-radius: 50%;
+
+            background: radial-gradient(circle, rgba(255,192,203,0.7) 0%, rgba(255,255,255,0) 70%); /* Soft pink glow */
+
+            transform: translate(-50%, -50%) scale(0);
+
+            transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+
+            opacity: 0;
+
+            z-index: 1; /* Below messages, above body background */
+
+        }
+
+
+
+        .decorations.decorated .background-glow {
+
+            width: 100vw;
+
+            height: 100vh;
+
+            transform: translate(-50%, -50%) scale(1);
+
+            opacity: 1;
+
+        }
+
+
+
+        /* Cake Styling (Placeholder) */
+
+        .cake {
+
+            width: 80vw; /* Use viewport width */
+
+            max-width: 250px; /* Maximum size */
+
+            height: 250px; /* Keep height proportional */
+
+            background-image: url('https://drive.google.com/thumbnail?id=1WxChh-kfh9X_3EMcJqCe3Ed5vcfCu_Nv');
+
+            background-size: cover;
+
+            background-position: center;
+
+            border-radius: 10px;
+
+            margin: 20px auto; /* Slightly less margin */
+
+            opacity: 0;
+
+            transform: scale(0.5);
+
+            transition: opacity 1s, transform 1s;
+
+            cursor: pointer;
+
+            position: relative;
+
+        }
+
+
+
+        .cake.revealed {
+
+            opacity: 1;
+
+            transform: scale(1);
+
+        }
+
+
+
+        .final-message-overlay {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.85);
+
+            color: white;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            flex-direction: column;
+
+            text-align: center;
+
+            z-index: 1000;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: opacity 0.5s;
+
+        }
+
+
+
+        .final-message-overlay.show {
+
+            opacity: 1;
+
+            pointer-events: auto;
+
+        }
+
+       
+
+        .final-message-text {
+
+            font-size: 2.5em;
+
+            padding: 20px;
+
+            animation: pulse 1.5s infinite alternate;
+
+        }
+
+       
+
+        @keyframes pulse {
+
+            from {
+
+                transform: scale(1);
+
+                opacity: 0.9;
+
+            }
+
+            to {
+
+                transform: scale(1.05);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+
+        /* --- NEW: Final Message Box Optimization for Small Screens --- */
+
+        .final-instruction-box {
+
+            padding: 10px; /* Reduced padding */
+
+            margin-bottom: 10px; /* Reduced margin */
+
+        }
+
+
+
+        /* Reduce font size for headers in the final instruction box on small screens */
+
+        .final-instruction-box h3 {
+
+            font-size: 1.1em; /* Smaller header text */
+
+            margin: 5px 0; /* Reduced margin around headers */
+
+        }
+
+
+
+        /* Ensure the main container doesn't take up the full width, leaving space for the cake */
+
+        @media (max-width: 600px) {
+
+            .container {
+
+                padding-top: 50px;
+
+            }
+
+        }
+
+
+
+        /* --- 📱 MOBILE POLISH & OPTIMIZATION --- */
+
+       
+
+        /* Target Phones (Screens narrower than 600px) */
+
+        @media (max-width: 600px) {
+
+           
+
+            /* 1. Maximize space */
+
+            .container {
+
+                width: 95%; /* Use more screen width */
+
+                padding: 10px; /* Less padding on the sides */
+
+            }
+
+
+
+            /* 2. Make text readable but not huge */
+
+            h2 {
+
+                font-size: 1.8em; /* Scale down the handwritten font */
+
+                margin-top: 10px;
+
+            }
+
+           
+
+            .message-box p {
+
+                font-size: 1em;
+
+                line-height: 1.4; /* Better reading spacing */
+
+            }
+
+
+
+            /* 3. Big, Tappable Buttons */
+
+            .action-button {
+
+                width: 90%; /* Make buttons almost full width */
+
+                padding: 15px 0; /* Taller buttons for easy tapping */
+
+                font-size: 1.2em; /* Larger text inside button */
+
+                margin: 10px auto; /* Space them out nicely */
+
+            }
+
+           
+
+            .button-group button {
+
+                padding: 12px 25px; /* Bigger Yes/No buttons */
+
+                font-size: 1.1em;
+
+            }
+
+
+
+            /* 4. Fit the Cake perfectly */
+
+            .cake {
+
+                width: 70vw; /* Cake takes 70% of screen width */
+
+                height: 70vw; /* Keep it square */
+
+                max-width: 250px; /* Limit size */
+
+                max-height: 250px;
+
+                margin: 15px auto;
+
+            }
+
+           
+
+            /* 5. Adjust Garland/Banner width */
+
+            .banner {
+
+                width: 95%; /* Stretch garland across screen */
+
+            }
+
+        }
+
+
+
+        /* Target Landscape Mode (When phone is rotated sideways) */
+
+        @media (max-height: 500px) {
+
+            .container {
+
+                padding-top: 60px; /* Ensure garland doesn't cover text */
+
+            }
+
+            .cake {
+
+                width: 150px; /* Smaller cake in landscape */
+
+                height: 150px;
+
+            }
+
+            .message-box {
+
+                min-height: auto; /* Allow box to be shorter */
+
+                padding: 10px;
+
+            }
+
+        }
+
+       
+
+        /* Fix for iPhone 'Notch' and bottom bar area */
+
+        .body {
+
+            padding-bottom: env(safe-area-inset-bottom);
+
+        }
+
+
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+
+        .container::-webkit-scrollbar {
+
+            display: none;
+
+        }
+
+
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+
+        .container {
+
+            -ms-overflow-style: none;  /* IE and Edge */
+
+        scrollbar-width: none;  /* Firefox */
+
+        }
+
+
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <div class="heart-container" id="heart-container"></div>
+
+   
+
+    <div class="decorations" id="decorations">
+
+        <div class="banner"></div>
+
+        <div class="background-glow"></div>
+
+    </div>
+
+
+
+    <div class="container">
+
+        <div id="messages">
+
+            <div class="message-box intro-message" id="msg-1">
+
+                <p><h1>It's Your Special Day Yeyey!!</h1></p>
+
+                <div class="sparkle">✨✨💖💖</div>
+
+            </div>
+
+            <div class="message-box intro-message" id="msg-2">
+
+                <p>I wanted to make something special for you because you are special to me!</p>
+
+            </div>
+
+            <div class="message-box intro-message" id="msg-3">
+
+                <p>Do you wanna see what I made??</p>
+
+                <div class="button-group">
+
+                    <button class="yes-btn" onclick="handleYesClick()">Yes!</button>
+
+                    <button class="no-btn" onclick="alert('Too bad, you are going to see it anyway 🙂🙂')">No</button>
+
+                </div>
+
+            </div>
+
+            <div class="message-box intro-message" id="msg-4">
+
+                <p><h4>Have a look at it, Madam Jiii</h4></p>
+
+            </div>
+
+        </div>
+
+       
+
+        <div id="action-area" style="display:none;">
+
+            <button class="action-button" id="lights-on-btn" onclick="toggleLights()">Lights On</button>
+
+            <button class="action-button" id="play-music-btn" onclick="playMusic()">Play Music</button>
+
+            <button class="action-button" id="decorate-btn" onclick="decorateBackground()">Decorate</button>
+
+            <button class="action-button" id="cut-cake-btn" onclick="revealCake()">Let's Cut the Cake!</button>
+
+        </div>
+
+
+
+        <div id="cake-area" style="display:none;">
+
+            <div class="message-box active **final-instruction-box**">
+
+                <p><h3 style="color: #126572;">Well, I Have a Message for You</h3></p>
+
+                <p><h3 style="color: #126572;">Cut the cake!</h3> <h6 style="color: #126572;">[Tap on the img]</h6></p>
+
+            </div>
+
+            <div class="cake" id="the-cake" onclick="showFinalMessage()"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="final-message-overlay" id="final-message-overlay">
+
+        <div class="final-message-text">
+
+            You r the best in this whole world, My friend!!<br>
+            Happy Birthday!
+
+        </div>
+
+    </div>
+
+
+
+    <audio id="birthday-music" loop preload="auto">
+        <source src="https://files.catbox.moe/7lgezm.mp3" type="audio/mpeg">    
+        Your browser does not support the audio element.
+    </audio>
+
+
+
+    <script>
+
+        const messages = ['msg-1', 'msg-2', 'msg-3'];
+
+        let currentMessageIndex = 0;
+
+        const audioPlayer = document.getElementById('birthday-music');
+
+        const body = document.body;
+
+        const decorations = document.getElementById('decorations');
+
+        const heartContainer = document.getElementById('heart-container');
+
+        const actionArea = document.getElementById('action-area');
+
+        const cakeArea = document.getElementById('cake-area');
+
+        const theCake = document.getElementById('the-cake');
+
+        const finalMessageOverlay = document.getElementById('final-message-overlay');
+
+        const lightsOnBtn = document.getElementById('lights-on-btn');
+
+        const playMusicBtn = document.getElementById('play-music-btn');
+
+        const decorateBtn = document.getElementById('decorate-btn');
+
+        const cutCakeBtn = document.getElementById('cut-cake-btn');
+
+        let heartInterval;
+        // Balloon Colors
+
+        // NEW Confetti Colors: Soft and celebratory
+
+        // NEW Balloon Colors (Separate from confetti)
+
+        const balloonColors = ['#ff6f91', '#4bc0c8', '#a1c181', '#f9c74f'];
+
+
+
+        const confettiColors = ['#ffccd5', '#ffe5ec', '#f0e6ef', '#c6e2e9', '#d4f0f0', '#fffacd']; // Softer, pastel tones
+
+
+        // --- Heart Generation Function (Unchanged) ---
+
+        function createHeart() {
+
+            const heart = document.createElement('div');
+
+            heart.classList.add('heart');
+
+            heart.innerHTML = '♡';
+
+           
+
+            const startX = Math.random() * 100;
+
+            const duration = 5 + Math.random() * 5;
+
+            const delay = Math.random() * 5;
+
+            const size = 1 + Math.random() * 0.5;
+
+
+
+            heart.style.left = startX + 'vw';
+
+            heart.style.animationDuration = duration + 's';
+
+            heart.style.animationDelay = -delay + 's';
+
+            heart.style.fontSize = size * 1.5 + 'em';
+
+           
+
+            heartContainer.appendChild(heart);
+
+
+
+            setTimeout(() => {
+
+                heart.remove();
+
+            }, (duration + delay) * 1000);
+
+        }
+
+
+
+        // --- Balloon Generation Function ---
+
+        // --- MODIFIED: Create Confetti/Sparkle Function (Replaces createBalloon) ---
+
+        // --- MODIFIED: Create Confetti/Sparkle Function ---
+
+        function createConfetti() {
+
+            const confetti = document.createElement('div');
+
+            confetti.classList.add('confetti');
+
+
+
+            const startX = Math.random() * 100;
+
+            const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+
+            const duration = 4 + Math.random() * 3;
+
+            const size = 8 + Math.random() * 12; // 8px to 20px, slightly larger
+
+
+
+            confetti.style.left = startX + 'vw';
+
+            confetti.style.animationDuration = duration + 's';
+
+            confetti.style.animationDelay = -Math.random() * 2 + 's';
+
+            confetti.style.width = size + 'px';
+
+            confetti.style.height = size + 'px';
+
+            confetti.style.backgroundColor = color; // Apply color here
+
+
+
+            // Randomly change shape
+
+            const shape = Math.random();
+
+            if (shape < 0.3) {
+
+                confetti.style.borderRadius = '0%'; // Square
+
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`; // Initial random rotation
+
+            } else if (shape < 0.6) {
+
+                confetti.style.borderRadius = '20%'; // Diamond-ish or rounded square
+
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+            } else if (shape > 0.9) { // Less frequent but prominent stars
+
+                confetti.classList.add('star'); // Apply star specific styles from CSS
+
+                confetti.innerHTML = '★';
+
+                confetti.style.backgroundColor = 'transparent'; // Stars use color property from CSS
+
+                confetti.style.fontSize = (size * 1.2) + 'px'; // Larger font for stars
+
+            }
+
+            // Default is round
+
+
+
+            decorations.appendChild(confetti);
+
+
+
+            setTimeout(() => {
+
+                confetti.remove();
+
+            }, duration * 1000 + 500);
+
+        }
+
+
+
+        // --- NEW: Create Balloon Function ---
+
+        function createBalloon() {
+
+            const balloon = document.createElement('div');
+
+            balloon.classList.add('balloon');
+
+
+
+            // Randomize position and color
+
+            const startX = Math.random() * 100;
+
+            const color = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+
+            const duration = 8 + Math.random() * 4; // 8 to 12 seconds float time
+
+
+
+            balloon.style.left = startX + 'vw';
+
+            balloon.style.backgroundColor = color;
+
+            balloon.style.color = color; // Used for the ::before knot
+
+            balloon.style.animationDuration = duration + 's';
+
+            balloon.style.animationDelay = -Math.random() * 3 + 's'; // Staggered start
+
+
+
+            decorations.appendChild(balloon);
+
+
+
+            // Remove the balloon after it floats away
+
+            setTimeout(() => {
+
+                balloon.remove();
+
+            }, duration * 1000 + 500);
+
+        }
+
+       
+        
+       
+
+        // --- Sequential Message Display (Unchanged) ---
+
+        function showNextMessage() {
+
+            if (currentMessageIndex < messages.length) {
+
+                const currentId = messages[currentMessageIndex];
+
+                const prevId = messages[currentMessageIndex - 1];
+
+                const nextMsg = document.getElementById(currentId);
+
+               
+
+                if (prevId) {
+
+                    document.getElementById(prevId).classList.remove('active');
+
+                }
+
+               
+
+                if (nextMsg) {
+
+                    setTimeout(() => {
+
+                        nextMsg.classList.add('active');
+
+                        currentMessageIndex++;
+
+                        if (currentMessageIndex <= messages.length) {
+
+                            if (currentId !== 'msg-3') {
+
+                                setTimeout(showNextMessage, 3000);
+
+                            }
+
+                        }
+
+                    }, currentMessageIndex > 0 ? 800 : 0);
+
+                }
+
+            }
+
+        }
+
+
+
+        // --- Handle "Yes!" Click (Unchanged) ---
+
+        function handleYesClick() {
+
+            document.getElementById('msg-3').classList.remove('active');
+
+            clearInterval(heartInterval);
+
+           
+
+            setTimeout(() => {
+
+                document.getElementById('msg-4').classList.add('active');
+
+                setTimeout(() => {
+
+                    document.getElementById('msg-4').classList.remove('active');
+
+                    startInteractiveSequence();
+
+                }, 1500);
+
+            }, 500);
+
+        }
+
+
+
+        // --- Interactive Button Sequence (Unchanged) ---
+
+        function startInteractiveSequence() {
+
+            document.getElementById('messages').style.display = 'none';
+
+            actionArea.style.display = 'block';
+
+           
+
+            body.classList.add('dark-mode');
+
+            setTimeout(() => {
+
+                lightsOnBtn.classList.add('show');
+
+            }, 100);
+
+        }
+
+
+
+        // --- Interactive Functions ---
+
+        function toggleLights() {
+
+            body.classList.remove('dark-mode');
+
+            lightsOnBtn.classList.remove('show');
+
+            lightsOnBtn.disabled = true;
+
+
+
+            setTimeout(() => {
+
+                playMusicBtn.classList.add('show');
+
+            }, 500);
+
+        }
+
+
+
+        // After (Fixed Code)
+        function playMusic() {
+
+            audioPlayer.play().catch(error => { 
+            
+                console.log("Music play failed, likely autoplay block:", error); 
+            
+            }); 
+            
+            playMusicBtn.classList.remove('show'); 
+            
+            playMusicBtn.disabled = true; 
+            
+            setTimeout(() => { decorateBtn.classList.add('show'); }, 500);
+        
+        }
+
+
+
+        function decorateBackground() {
+
+            decorations.classList.add('decorated');
+
+            decorateBtn.classList.remove('show');
+
+            decorateBtn.disabled = true;
+
+
+
+            // Show the background glow
+
+            const glow = document.createElement('div');
+
+            glow.classList.add('background-glow');
+
+            decorations.appendChild(glow);
+
+
+
+            // Launch more Confetti for a fuller effect
+
+            for (let i = 0; i < 80; i++) { // Increased confetti count
+
+                createConfetti();
+
+            }
+
+   
+
+            // Launch Balloons!
+
+            for (let i = 0; i < 15; i++) { // Increased balloon count
+
+                createBalloon();
+
+            }
+
+
+
+            setTimeout(() => {
+
+                cutCakeBtn.classList.add('show');
+
+            }, 500);
+
+        }
+
+
+
+        function revealCake() {
+
+            actionArea.style.display = 'none';
+
+            cakeArea.style.display = 'block';
+
+           
+
+            setTimeout(() => {
+
+                theCake.classList.add('revealed');
+
+            }, 100);
+
+        }
+
+
+
+        // Before
+        function showFinalMessage() {
+
+            if (audioPlayer) {
+                
+                audioPlayer.pause(); audioPlayer.currentTime = 0; 
+            
+            } finalMessageOverlay.classList.add('show'); 
+        
+        }        
+
+
+
+
+
+        // Start the sequence when the page loads
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            heartInterval = setInterval(createHeart, 400);
+
+            showNextMessage();
+
+        });
+
+    </script>
+
+</body>
+
+</html>
